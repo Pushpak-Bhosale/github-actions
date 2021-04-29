@@ -15,5 +15,5 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ftp.blutechnosoft.com
-          username: ${{ secrets.ftp_username }}
+          username: blutechnosoft@blutechnosoft.com
           password: ${{ secrets.ftp_password }}
