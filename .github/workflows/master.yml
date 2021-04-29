@@ -1,19 +1,24 @@
-on:
-  push:
-    branches:
-      - master
-name: 🚀 Deploy website on push
-jobs:
-  web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2.3.2
+name: Github Actions Example
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: ftp.worrykick.com
-          username: ${{ secrets.ftp_username }}
-          password: ${{ secrets.ftp_password }}
+on:
+  pull_request:
+  push:
+    branches: 
+      - master
+      - develop
+
+jobs:
+  test:
+    name: Running Units Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      run: npm install
+    - name: Test
+      run: npm test
